@@ -4,7 +4,7 @@
 
 .App-header {
     text-align: center;
-    background-color: #282c34;
+    background-color: #004c91;
     min-height: 100px;
     display: flex;
     flex-direction: column;
@@ -12,4 +12,13 @@
     justify-content: center;
     font-size: calc(10px + 2vmin);
     color: white;
+}
+
+.App-content {
+    display: flex;
+    flex-direction: row;
+}
+
+.App-content > .SerachForm,.Product-grid {
+    margin: 10px;
 }

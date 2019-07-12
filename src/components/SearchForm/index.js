@@ -2,29 +2,28 @@ import React, { Component } from 'react';
 import './SearchForm.css';
 
 class SearchForm extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            keyword: ""
-        };
-    }
-
     render() {
         return (
-            <form className="SerachForm">
-                <input type="text" value={this.state.keyword} onChange={e => {
-                    this.setState({keyword: e.target.value});
-                }} />
-                <button onClick={(e) => {
-                    fetch(`/search/${this.state.keyword}`, {method: "POST"})
-                    .then(function(response) {
-                        return response.json();
-                    })
-                    .then(function(json) {
-                        console.log(json);
-                    });
-                    e.preventDefault();
-                }}>First Test</button>
+            <form className="SerachForm" onSubmit={(e) => {
+                fetch(`/search/${this.props.keyword}`, {method: "POST"})
+                .then((response) => {
+                    return response.json();
+                })
+                .then((json) => {
+                    this.props.onUpdateResults(json);
+                });
+                e.preventDefault();
+            }}>
+                <input
+                    className="SearchForm-searchText"
+                    type="search"
+                    value={this.props.keyword}
+                    placeholder="Search"
+                    onChange={e => {
+                        this.props.onUpdateKeyword(e.target.value);
+                    }}
+                />
+                <button className="SearchForm-searchButton"><span role="img" aria-label="Search">&#x1f50d;</span></button>
             </form>
         );
     }

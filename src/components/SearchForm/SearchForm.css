@@ -1,4 +1,27 @@
 .SerachForm {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    height: 30px;
+}
+
+.SearchForm-searchText {
+    border-top: 1px solid #AAA;
+    border-right: none;
+    border-bottom: 1px solid #AAA;
+    border-left: 1px solid #AAA;
+    border-top-left-radius: 0.5em;
+    border-bottom-left-radius: 0.5em;
+    outline: none;
+    padding: 0 3px;
+}
+
+.SearchForm-searchButton {
+    background-color: #ffc220;
+    border-top: 1px solid #AAA;
+    border-right: 1px solid #AAA;
+    border-bottom: 1px solid #AAA;
+    border-left: none;
+    border-top-right-radius: 0.5em;
+    border-bottom-right-radius: 0.5em;
+    outline: none;
 }

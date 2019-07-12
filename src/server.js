@@ -69,9 +69,9 @@ const findKeyWordTerms = (search) => {
 }
 
 /**
- * Finds Product IDs which have "matchWords" in their long descriptions. The
- * longDescription will have it's HTML entities decoded and then the HTML tags
- * will be stripped before evaluation.
+ * Finds Product IDs which have "matchWords" in their long/short descriptions &
+ * name. The longDescription will have it's HTML entities decoded and then the
+ * HTML tags will be stripped before evaluation.
  * @param  {Array}  matchWords An array of search terms
  * @return {Object}            Matched Product IDs as keys with the number of
  *                             matched words as values.
@@ -84,10 +84,18 @@ const findIdsContainingWords = async (matchWords) => {
     // Go through each product
     Object.keys(initData.products).forEach(id => {
         const longDescription = initData.products[id].longDescription;
+        const shortDescription = initData.products[id].shortDescription;
+        const name = initData.products[id].name;
         console.log(`looking in id (${id}) for words`);
         matchWords.forEach(word => {
             const entities = new Entities();
-            if (striptags(entities.decode(longDescription), [], " ").replace(/ +(?= )/g,'').includes(word)) {
+            if (striptags(entities.decode(longDescription), [], " ").replace(/ +(?= )/g,'').toLowerCase().includes(word.toLowerCase())) {
+                ids[id] = ids[id] ? ids[id]+1 : 1;
+            }
+            if (striptags(entities.decode(shortDescription), [], " ").replace(/ +(?= )/g,'').toLowerCase().includes(word.toLowerCase())) {
+                ids[id] = ids[id] ? ids[id]+1 : 1;
+            }
+            if (striptags(entities.decode(name), [], " ").replace(/ +(?= )/g,'').toLowerCase().includes(word.toLowerCase())) {
                 ids[id] = ids[id] ? ids[id]+1 : 1;
             }
         });
