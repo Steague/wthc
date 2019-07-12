@@ -1,0 +1,4 @@
+.SerachForm {
+    display: flex;
+    flex-direction: column;
+}
